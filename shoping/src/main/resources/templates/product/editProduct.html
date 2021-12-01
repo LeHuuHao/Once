@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html layout:decorator="template">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Edit User</title>
+</head>
+
+<body layout:fragment="content">
+	<h1>Edit Product</h1>
+	<form method="post" th:action="@{/admin/product/edit}" th:object="${product}" >
+		<div>
+			<label>ID:</label>
+			<input th:field="*{id}" />
+		</div>
+
+		<div>
+			<label th:text="#{product.name}"></label>
+			<input th:field="*{name}" />
+			<span th:errors="*{name}" />
+		</div>
+
+		<div>
+			<label>Price: </label>
+			<input th:field="*{price}" />
+		</div>
+       <div>
+			<label>Depcription: </label>
+			<input th:field="*{description}" />
+			<span th:errors="*{description}" />
+		</div>
+		<div>
+			<label>PhotoURL: </label>
+			<input th:field="*{photoURL}" />
+		</div>
+		
+		
+		<button type="submit">Save</button>
+	</form>
+
+</body>
+
+</html>

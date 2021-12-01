@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Register</title>
+</head>
+<body>
+<h1>Register</h1>
+	<form method="post" th:action="@{/register}">
+		<label>Username: </label>
+		<input name="username" />
+		
+		<label>Password: </label>
+		<input name="password"/>
+		
+		<label>Name: </label>
+		<input name="name"/>
+		
+		<button type="submit">Register</button>
+	</form>
+</body>
+</html>

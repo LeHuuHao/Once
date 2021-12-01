@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html layout:decorator="template">
+<head>
+<meta charset="UTF-8">
+<title>Edit Category</title>
+</head>
+<body layout:fragment="content">
+	<h1>Edit Category</h1>
+	<form method="post" th:action="@{/admin/editcate}">
+		<label>ID:</label> <input name="id" th:value="${category.getId()}"/>
+		
+		<label>Name: </label><input name="name" th:value="${category.getName()}"/>		
+		
+		
+		<button type="submit">Save</button>
+	</form>
+
+</body>
+</html>

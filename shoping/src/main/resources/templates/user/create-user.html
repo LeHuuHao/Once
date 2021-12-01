@@ -1,0 +1,30 @@
+
+<!DOCTYPE html>
+<html layout:decorator="template">
+<head>
+<meta charset="UTF-8">
+<title>Register</title>
+</head>
+<body layout:fragment="content">
+	<h1>Create User</h1>
+	<form method="post" th:action="@{/admin/user/create}">
+		<label>Username: </label>
+		<input name="username" />
+		
+		<label>Password: </label>
+		<input name="password"/>
+		
+		<label>Name: </label>
+		<input name="name"/>
+		<label>Role: </label>
+		<select name="role">
+			<option value="ROLE_ADMIN">ADMIN</option>.
+			<option value="ROLE_MEMBER">MEMBER</option>
+		</select>
+
+		
+		<button type="submit">Create</button>
+	</form>
+
+</body>
+</html>

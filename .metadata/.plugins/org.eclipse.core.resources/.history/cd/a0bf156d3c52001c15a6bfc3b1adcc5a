@@ -1,0 +1,52 @@
+package com.trungtamjava.hellospringboot.controller;
+@RestController
+@RequestMapping("/admin/api/user")
+
+public class APIPersonController {
+	@Autowired // tu dong gan BEAN tuong ung vao - DI
+	PersonRepository personRepository;
+
+	@Autowired
+	PersonValidator personValidator;
+
+	@Autowired
+	PasswordEncoder encoder;
+
+	@PostMapping("/create")
+	public Person create(@ModelAttribute Person user) {
+		// encode password
+		user.setPassword(encoder.encode(user.getPassword()));
+		personRepository.save(user);
+
+		return user;
+	}
+
+	/// SEARCH USER
+	@GetMapping("/search")
+	public List<Person> search(@RequestParam(value = "name", required = false) String name) {
+		if (name == null)
+			name = "";/// neu nguoi dung ko truyen len name
+		List<Person> users = personRepository.search("%" + name + "%");/// MODEL
+		return users;
+	}
+
+	@DeleteMapping("/delete")
+	public void delete(@RequestParam("id") int id) {
+		personRepository.deleteById(id);
+	}
+
+	@PostMapping("/edit")
+	public void edit(@ModelAttribute Person user) {
+		// encode password
+		user.setPassword(encoder.encode(user.getPassword()));
+		personRepository.save(user);
+	}
+
+	@PutMapping("/edit-body")
+	public void editBody(@RequestBody Person user) {
+		// encode password
+		user.setPassword(encoder.encode(user.getPassword()));
+		personRepository.save(user);
+	}
+
+}

@@ -1,0 +1,5 @@
+package com.trungtamjava.hellospringboot.controller;
+
+public class APIPersonController {
+
+}

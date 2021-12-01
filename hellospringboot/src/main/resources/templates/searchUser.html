@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Search User</title>
+</head>
+
+<body>
+	<h1>Xin chao <span th:text="${session.name }"></span></h1>
+
+	<h1>User Table</h1>
+	<a th:href='@{/register}'>Them moi </a>
+
+	<form method="get" th:action="@{/admin/user/search}">
+		<input name="name">
+		<button type="submit">Search</button>
+	</form>
+
+	<table>
+		<tr th:each="user : ${uList}">
+			<td th:text="${user.id}"></td>
+			<td th:text="${user.getUsername() }"></td>
+			<td th:text="${user.getPassword()}"></td>
+			<td th:text="${user.role}"></td>
+			<td th:text="${user.name}"></td>
+			<td th:text="${user.card?.id_Number}"></td>
+			<td th:text="${#dates.format(user.card?.issue_Date,'dd/MM/yyyy')}"></td>
+			<td>
+			<span th:each="car: ${user.cars}">
+			<span th:text="${car.name}"></span></span>
+				<a th:href="@{'/admin/user/delete?id=' + ${user.id} }"> Xoa </a>
+				<a th:href="@{'/admin/user/edit?id=' + ${user.id} }"> Sua </a>
+			</td>
+		</tr>
+	</table>
+</body>
+
+</html>

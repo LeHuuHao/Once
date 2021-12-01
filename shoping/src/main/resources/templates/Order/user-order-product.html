@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>UserOrder Product</title>
+</head>
+<body>
+ <form th:method="post"  th:action="@{/admin/user-oder-product/userOrderProduct}">
+    <label>Product</label>
+      <select name="product_id">
+       <option th:each="product:${listUserOderProduct}" th:value="${product.id}" th:text="${product.name}"> </option>
+      </select>
+   <label>Quanity</label>
+   <input name="quanity">
+   <label>UnitPrice</label>
+   <input name="unitprice">
+   <button type="submit">Create</button>
+ </form>
+</body>
+</html>

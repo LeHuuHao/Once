@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html layout:decorator="template">
+<head>
+<meta charset="UTF-8">
+<title>Register</title>
+</head>
+<body layout:fragment="content">
+
+	<h1>Register</h1>
+	<form method="post" th:action="@{/admin/category/registercate}">
+	
+		<label>id: </label>
+		<input name="id" />				
+		<br>
+		<label>Name: </label>
+		<input name="name" />				
+		<br>
+		<button type="submit">Register</button>
+	</form>
+
+</body>
+</html>

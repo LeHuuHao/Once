@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title>Edit Product</title>
+<link rel="stylesheet" th:href="@{/style.css}" />
+</head>
+
+<body>
+	<h1>Edit User</h1>
+	<form method="post" th:action="@{/admin/product/edit}"
+		th:object="${product}">
+		<div>
+			<label>ID:</label> <input th:field="*{id}" />
+		</div>
+
+		<div>
+			<label>Name: </label> <label th:text="#{product.name}"></label> <input
+				th:field="*{name}" /> <span th:errors="*{name}" />
+		</div>
+
+		<div>
+			<label>Username: </label> <input th:field="*{username}" /> <span
+				th:errors="*{username}" />
+		</div>
+
+		<div>
+			<label>Password: </label> <input type="password"
+				th:field="*{password}" /> <span th:errors="*{password}" />
+		</div>
+
+		<label>Name: </label> <input th:field="*{name}" /> <span
+			th:errors="*{name}" />
+		<div>
+			<label>Price: </label> <input th:field="*{price}" /> <span
+				th:errors="*{price}" />
+		</div>
+		<div>
+			<label>ID: </label> <input th:field="*{address.id}" />
+		</div>
+		 <div>
+			<label>City: </label> <input th:field="*{address.city}" />
+			<div> 
+				<div>
+					<label>Product_Code: </label> <input
+						th:field="*{address.product_code}" />
+					<div>
+
+						<button type="submit">Save</button>
+	</form>
+
+</body>
+
+</html>

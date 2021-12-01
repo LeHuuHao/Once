@@ -1,0 +1,41 @@
+<div th:fragment="header">
+	<ul>
+		<li>
+			<a th:href="@{/admin/user/create}">Create User</a>
+		</li>
+		<li>
+			<a th:href="@{/admin/user/search}">Search User</a>
+		</li>
+	</ul>
+	<ul>
+		<li>
+			<a th:href="@{/admin/product/create}">Create Product</a>
+		</li>
+		<li>
+			<a th:href="@{/admin/product/search}">Search Product</a>
+		</li>
+		<li>
+			<a th:href="@{/admin/category/registercate}">Create Category</a>
+		</li>
+		<li>
+			<a th:href="@{/admin/category/searchcate}">Search Category</a>
+		</li>
+		<!-- <li>
+			<a th:href="@{/admin/user-oder/userOrder}">UserOder</a>
+		</li>
+		<li>
+			<a th:href="@{/admin/user-oder/search}">SearchUserOrder</a>
+		</li> -->
+		<li>
+			<a th:href="@{/cart}">Cart</a>
+		</li>
+		<li>
+			<a th:href="@{/admin/order/search}">order</a>
+		</li>
+	</ul>
+</div>
+
+<div th:fragment="footer">
+	<p>@made by Le Huu Hao</p>
+	<p>@support by Dinh Cuong</p>
+</div>

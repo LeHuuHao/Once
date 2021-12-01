@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html layout:decorator="template">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Search Product</title>
+</head>
+
+<body>
+	<div layout:fragment="content">
+		<h1>Product Table</h1>
+		<form method="get" th:action="@{/admin/product/search}">
+			<div class="row">
+				<div class="col">
+					<input name="name" class="form-control" placeholder="Search...">
+				</div>
+				<div class="col">
+					<button type="submit" class="btn btn-primary">Search</button>
+				</div>
+			</div>
+		</form>
+		<table class="table">
+			<tr>
+				<th>ID</th>
+				<th>Name</th>
+				<th>Price</th>
+				<th>Decription</th>
+				<th>Image</th>
+				<th>Option</th>
+			</tr>
+			<tr th:each="product : ${listProduct}">
+				<td th:text="${product.id}"></td>
+				<td th:text="${product.name }"></td>
+				<td th:text="${product.price}"></td>
+				<td th:text="${product.description}"></td>
+				 <td><img th:src="@{'/member/product/download?image='+${product.getPhotoURL()}}"
+							style=" height: 50px;"></td>
+				<td>
+					<a class="btn btn-danger" th:href="@{'/member/product/delete?id=' + ${product.id} }"> Delete </a>
+					<a class="btn btn-primary" th:href="@{'/member/product/edit?id=' + ${product.id} }"> Edit </a>
+				</td>
+				<td>
+				<form th:action="@{/add-to-cart}" method="GET">
+					<input type="hidden" name="pid" th:value="${product.id}"/>
+					<input type="number" name="quantity" value="0"/>
+					<button type="submit" class="btn btn-primary">Add to cart</button >
+				</form>
+			</td>
+			</tr>
+		</table>
+	</div>
+</body>
+
+</html>

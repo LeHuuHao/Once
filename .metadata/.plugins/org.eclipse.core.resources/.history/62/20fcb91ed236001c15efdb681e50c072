@@ -1,0 +1,5 @@
+package com.huuhao.shoping.entity;
+
+public class Person {
+
+}

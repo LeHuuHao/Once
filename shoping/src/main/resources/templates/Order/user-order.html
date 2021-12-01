@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>UserOrder</title>
+</head>
+<body>
+<h1>UserOrder</h1>
+<form method="post" th:action="@{/admin/user-oder/userOrder}">
+      <label>Date</label>
+      <input name="date">
+      <label>Buyer</label>
+      <select name="buyerId">
+       <option th:each="person:${listUserOder}" th:value="${person.id}" th:text="${person.name}"> </option>
+      </select>
+      <button type="submit">Create</button>
+</form>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html layout:decorator="template">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Search Product</title>
+</head>
+
+<body layout:fragment="content">
+	<h1>Order</h1>
+
+	<table class="table">
+		<tr>
+			<th>ID</th>
+			<th>Name</th>
+			<th>CreatedDate</th>
+		</tr>
+		<tr th:each="userOrder : ${userOrders}">
+			<td th:text="${userOrder.id}"></td>
+			<td th:text="${userOrder.buyer.name}"></td>
+			<td th:text="${userOrder.createdDate}"></td>
+		</tr>
+	</table>
+</body>
+
+</html>

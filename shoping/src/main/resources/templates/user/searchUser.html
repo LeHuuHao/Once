@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html layout:decorator="template">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Search User</title>
+</head>
+
+<body>
+	<div layout:fragment="content">
+		<h1>Person Table</h1>
+		<form method="get" th:action="@{/admin/user/search}">
+			<div class="row">
+				<div class="col">
+					<input name="name" class="form-control" placeholder="Search...">
+				</div>
+				<div class="col">
+					<button type="submit" class="btn btn-primary">Search</button>
+				</div>
+			</div>
+		</form>
+		<table class="table">
+			<tr>
+				<th>ID</th>
+				<th>Username</th>
+				<th>Password</th>
+				<th>Role</th>
+				<th>Name</th>
+				<th>Option</th>
+			</tr>
+			<tr th:each="user : ${uList}">
+				<td th:text="${user.id}"></td>
+				<td th:text="${user.getUsername() }"></td>
+				<td th:text="${user.getPassword()}"></td>
+				<td th:text="${user.role}"></td>
+				<td th:text="${user.name}"></td>
+				<td>
+					<a class="btn btn-danger" th:href="@{'/admin/user/delete?id=' + ${user.id} }"> Delete </a>
+					<a class="btn btn-primary" th:href="@{'/admin/user/edit?id=' + ${user.id} }"> Edit </a>
+				</td>
+			</tr>
+		</table>
+	</div>
+</body>
+
+</html>

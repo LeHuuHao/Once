@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename local variable &apos;user&apos; in &apos;com.trungtamjava.controller.RegisterController.register(...)&apos; to &apos;product&apos;&#x0D;&#x0A;- Original project: &apos;hellospring&apos;&#x0D;&#x0A;- Original element: &apos;com.trungtamjava.controller.RegisterController.register(String, String, String, String, String, String).user&apos;&#x0D;&#x0A;- Renamed element: &apos;user&apos;&#x0D;&#x0A;- Update references to refactored element" description="Rename local variable &apos;user&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.trungtamjava.controller{RegisterController.java[RegisterController~register~QString;~QString;~QString;~QString;~QString;~QString;@user!1251!1279!1259!1262!QProduct;!0!false" name="product" references="true" stamp="1634522459392" version="1.0"/>
+</session>

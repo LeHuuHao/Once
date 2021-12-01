@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html layout:decorator="template">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Search Product</title>
+</head>
+
+<body layout:fragment="content">
+	<h1>Cart View</h1>
+	<table class="table">
+		<tr>
+			<th>ID</th>
+			<th>Name</th>
+			<th>PhotoURL</th>
+			<th>Quantity</th>
+			<th>Price</th>
+		</tr>
+		<tr th:each="map : ${session.cart}">
+			<td th:text="${map.key}"></td>
+			<td th:text="${map.value.product.name}"></td>
+			<td>
+				<img th:src="@{'/admin/product/download?image='+${map.value.product.getPhotoURL()}}"
+					style="width: 100px">
+			</td>
+			<td th:text="${map.value.quanity}"></td>
+			<td>
+				<span th:text="${map.value.quanity}"></span>
+				* <span th:text="${map.value.unitPrice}"></span>
+				= <span th:text="${map.value.quanity * map.value.unitPrice}"></span>
+			</td>
+		</tr>
+	</table>
+	<form th:action="@{/admin/confirm-order}" method="GET">
+		<div class="row">
+			<label>Select buyer</label>
+			<select name="buyerId" class="form-control">
+				<option th:each="buyer : ${buyList}" th:value="${buyer.id}" th:text="${buyer.name}"></option>
+			</select>
+			<br/>
+			<button class="btn btn-danger">Confirm order</button>
+		</div>
+	</form>
+</body>
+
+</html>

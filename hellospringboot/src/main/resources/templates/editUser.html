@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Edit User</title>
+	<link rel="stylesheet" th:href="@{/style.css}" />
+</head>
+
+<body>
+	<h1>Edit User</h1>
+	<form method="post" th:action="@{/admin/user/edit}" th:object="${user}">
+		<div>
+			<label>ID:</label>
+			<input th:field="*{id}" />
+		</div>
+
+		<div>
+			<label th:text="#{user.name}"></label>
+			<input th:field="*{name}" />
+			<span th:errors="*{name}" />
+		</div>
+
+		<div>
+			<label>Username: </label>
+			<input th:field="*{username}" />
+			<span th:errors="*{username}" />
+		</div>
+
+		<div>
+			<label>Password: </label>
+			<input type="password" th:field="*{password}" />
+			<span th:errors="*{password}" />
+		</div>
+
+		<label>Role: </label>
+		<input type="radio" th:field="*{role}" value="ADMIN" />ADMIN
+		<input type="radio" th:field="*{role}" value="MEMBER" />MEMBER
+		<br/>
+		<label>ID: </label>
+		<input th:field="*{card.id}"/>
+		
+		<label>idNumber: </label>
+		<input th:field="*{card.id_Number}"/>
+
+		<label>issueDate: </label>
+		<input th:value="${#dates.format(user.card.issue_Date,'dd/MM/yyyy')}" name="date"/>
+
+		<button type="submit">Save</button>
+	</form>
+
+</body>
+
+</html>

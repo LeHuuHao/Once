@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html layout:decorator="template">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Search Product</title>
+</head>
+
+<body layout:fragment="content">
+	<h1>Cart View</h1>
+	<table class="table">
+		<tr>
+			<th>ID</th>
+			<th>Name</th>
+			<th>PhotoURL</th>
+			<th>Quantity</th>
+			<th>Price</th>
+			<th>Option</th>
+		</tr>
+		<tr th:each="map : ${session.cart}">
+			<td th:text="${map.key}"></td>
+			<td th:text="${map.value.product.name}"></td>
+			<td>
+				<img th:src="@{'/admin/product/download?image='+${map.value.product.getPhotoURL()}}" style="width: 100px">
+			</td>
+			<td th:text="${map.value.quanity}"></td>
+			<td>
+				<span th:text="${map.value.quanity}"></span>
+				* <span th:text="${map.value.unitPrice}"></span>
+				= <span th:text="${map.value.quanity * map.value.unitPrice}"></span>
+				
+				<form th:action="@{/update-to-cart}" method="get">
+					<input type="hidden" name="pid" th:value="${map.key}"/>
+					<input type="number" name="quanity" th:value="${map.value.quanity}"/>
+					<button type="submit">Update</button >
+				</form >
+			</td>
+			<td>
+				<a th:href="@{'/remove-cart-item?pid='+ ${map.key} }" class="btn btn-danger"> Xoa </a>
+			</td>
+		</tr>
+	</table>
+	<div class="row">
+	<a href="/admin/place-order" class="btn btn-primary pull-right">Place order</a>
+	</div>
+</body>
+
+</html>

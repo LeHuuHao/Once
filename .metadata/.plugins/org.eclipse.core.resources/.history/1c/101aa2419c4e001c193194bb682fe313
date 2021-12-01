@@ -1,0 +1,88 @@
+package com.trungtamjava.hellospringboot.controller;
+
+import java.net.http.HttpRequest;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.trungtamjava.hellospringboot.entity.Person;
+import com.trungtamjava.hellospringboot.entity.Product;
+import com.trungtamjava.hellospringboot.entity.UserOrder;
+import com.trungtamjava.hellospringboot.entity.UserOrderProduct;
+import com.trungtamjava.hellospringboot.repository.PersonRepository;
+import com.trungtamjava.hellospringboot.repository.ProductRepository;
+import com.trungtamjava.hellospringboot.repository.UserOrderReposity;
+
+@Controller
+@RequestMapping("/member")
+public class ClientController {
+	@Autowired PersonRepository personRepository;
+	@Autowired ProductRepository productRepository;
+	@Autowired UserOrderReposity userOrderReposity;
+	
+	@GetMapping("/search")
+	public String search(HttpServletRequest req, @RequestParam(value = "name", required = false) String name) {
+		if(name==null) {
+			name="";
+		}
+		List<Product> products=productRepository.search(name);
+		req.setAttribute("listProduct", products);
+		return "product/searchProduct";
+
+	}
+	@GetMapping("/confirm-order")
+	public String addOrder(HttpSession session) {
+		// lay thang dn hien tai
+		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+		UserOrder userOrder = new UserOrder();
+		userOrder.setCreatedDate(new Date());
+		// set buyer
+		Person buyer = personRepository.getByUsername(user.getUsername());
+		userOrder.setBuyer(buyer);
+
+		// doc tu session gio hang
+		Object obj = session.getAttribute("cart");
+
+		if (obj != null) {
+			// doc map tu session
+			Map<Integer, UserOrderProduct> map = (Map<Integer, UserOrderProduct>) obj;
+
+			// convert map to list
+			List<UserOrderProduct> orderProducts = new ArrayList<>();
+
+			for (Entry<Integer, UserOrderProduct> entry : map.entrySet()) {
+				UserOrderProduct userOrderProduct = entry.getValue();
+				// set user order, thuoc ve don hang id
+				userOrderProduct.setUserOrder(userOrder);
+
+				orderProducts.add(userOrderProduct);
+			}
+
+			// set list vao usserorder de luu cascade
+			userOrder.setUserOrderProducts(orderProducts);
+		}
+
+		userOrderReposity.save(userOrder);
+
+		// xoa session sau khi them thanh cong
+		session.removeAttribute("cart");
+
+		return "redirect:/admin/order/search";
+	}
+	
+
+}
